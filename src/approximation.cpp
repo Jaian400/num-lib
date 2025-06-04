@@ -32,7 +32,7 @@ std::vector<double> approximate(std::vector <double>base, std::pair<double, doub
         b[i] = integrate(INTEGRATION_N, base_times_func, ab);
     }
 
-    return solve_gauss(matrix, b, N);
+    return solve_linear_equation(matrix, b, N);
 }
 
 // auto basis_product = [i, j](double x) {
