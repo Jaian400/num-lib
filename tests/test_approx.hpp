@@ -3,7 +3,7 @@
 #include <iomanip>
 #include <fstream>
 
-void verify_approximation(const std::vector<double>& coeffs, double (*f)(double), std::pair<double, double> ab) {
+void verify_approximation(const std::vector<double>& coeffs, double (*f)(double), std::pair<double, double> ab, double tolerance) {
     std::ofstream output_csv("output_aprox.csv");
     if (!output_csv.is_open()) {
         std::cerr << "Error, cannot open file\n"; 
@@ -12,6 +12,7 @@ void verify_approximation(const std::vector<double>& coeffs, double (*f)(double)
 
     int N = 20;
     double h = (ab.second - ab.first) / N;
+    double error_sum = 0;
 
     std::cout << std::setw(15) << "testing x" << 
                     std::setw(15) << "precised" << 
@@ -23,6 +24,7 @@ void verify_approximation(const std::vector<double>& coeffs, double (*f)(double)
         double fx = f(x);
         double ax = calculate_f(coeffs, x);
         double error = std::abs(fx - ax);
+        error_sum += error;
         // << std::fixed << std::setprecision(5)
         std::cout << std::setw(15) << x << 
                     std::setw(15) << fx << 
@@ -33,6 +35,13 @@ void verify_approximation(const std::vector<double>& coeffs, double (*f)(double)
                     "," << fx << 
                     "," << ax <<
                     "," << error << "\n";
+    }
+
+    double mean_error = error_sum / (N+1);
+    if(mean_error < tolerance){
+        std::cout << "TEST PASSED\n";
+    } else {
+        std::cout << "TEST FAILED\n";
     }
 
     output_csv.close();
@@ -55,11 +64,12 @@ void test_approx(){
         base.push_back(1);
     }
 
-    std::vector<double> output = approximate(base, ab, f1);
+    std::vector<double> output = approximate(ab, f1);
 
     for (double o : output){
         std::cout << o << "\n";
     }
-
-    verify_approximation(output, f1, ab);
+    
+    std::cout << "\nAPPROXIMATION TEST \n";
+    verify_approximation(output, f1, ab, 0.001);
 }

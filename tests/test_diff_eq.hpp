@@ -6,12 +6,11 @@
 #include <fstream>
 #include <string>
 
-bool test_passed(int N, std::vector<double> result, std::pair<double,double> ab, double (*g) (double), std::string filename){
+bool test_passed(int N, std::vector<double> result, std::pair<double,double> ab, double (*g) (double), std::string filename, double tolerance){
     std::ofstream output_csv;
     output_csv.open(filename);
     
     double h = (ab.second - ab.first) / N;
-    double tolerance = 0.01; // duży krok duży błąd
 
     // std::cout << std::fixed << std::setprecision(5);
     std::cout << std::setw(15) << "x  |"
@@ -29,17 +28,19 @@ bool test_passed(int N, std::vector<double> result, std::pair<double,double> ab,
     std::cout<<"\n";
 
     double sum_error_sqr = 0;
+    double error_sqr;
     
     for(int i = 0; i <= N; ++i){
         double x = ab.first + i * h;
         double expected = g(x);
         double error = std::abs(result[i] - expected);
-        double error_sqr = std::pow(result[i] - expected,2);
+        error_sqr = std::pow(result[i] - expected,2);
+
         sum_error_sqr += error_sqr;
 
-        if(i != N){
-           continue; 
-        }
+        // if(i != N){
+        //    continue; 
+        // }
         std::cout << std::setw(14) << x << "|"
                     << std::setw(14) << result[i] << "|" 
                     << std::setw(14) <<expected << "|"
@@ -49,21 +50,16 @@ bool test_passed(int N, std::vector<double> result, std::pair<double,double> ab,
                     << result[i] << "," 
                     <<expected << ","
                     << error << "\n";
-        
-        // if(error > tolerance){
-        //     std::cout << std::setw(14) << x << "|"
-        //             << std::setw(14) << result[i] << "|" 
-        //             << std::setw(14) <<expected << "|"
-        //             << std::setw(14) << error << "\n";
-        //     return false;
-        // }
     }
 
-    std::cout<<"Mean error sqr ->" << sum_error_sqr/(N+1) << "\n";
+    // std::cout<<"Mean error sqr ->" << sum_error_sqr/(N+1) << "\n";
 
     output_csv.close();
 
-    return true;
+    if(error_sqr < tolerance){
+        return true;
+    }
+    return false;
 }
 
 // problem
@@ -116,7 +112,7 @@ void test_euler(){
 
     std::vector <double> result = solve_diff_eq_euler(N, ab, y0, T);
 
-    if(test_passed(N, result, ab, T_s, "output_diff.csv")){
+    if(test_passed(N, result, ab, T_s, "output_diff.csv", 0.01)){
         // std::cout << "Acceptable error\n";
     } else {
         // std::cout << "Big error\n";
@@ -132,11 +128,12 @@ void test_method(std::vector<double> (*method)(int, std::pair<double, double>, d
     int N = 50;
 
     std::vector <double> result = method(N, ab, y0, T);
-
-    if(test_passed(N, result, ab, T_s, filename)){
-        // std::cout << "Acceptable error\n";
+    
+    double tolerance = 0.01;
+    if(test_passed(N, result, ab, T_s, filename, tolerance)){
+        std::cout << "TEST PASSED; Error smaller than " << tolerance << "\n";
     } else {
-        // std::cout << "Big error\n";
+        std::cout << "TEST FAILED; Error greater than " << tolerance << "\n";
     }
 }
 
@@ -145,18 +142,18 @@ void test_diff_eq(){
     std::cout<<"\n";
 
     std::cout<<"TEST EULER-----------------\n\n";
-    test_method(solve_diff_eq_euler, "output_euler.csv");
+    test_method(solve_diff_eq_euler, "output_test_euler.csv");
     std::cout<<"\n\n";
 
     std::cout<<"TEST HEUNA-----------------\n\n";
-    test_method(solve_diff_eq_heuna, "output_heuna.csv");
+    test_method(solve_diff_eq_heuna, "output_test_heuna.csv");
     std::cout<<"\n\n";
     
     std::cout<<"TEST MIDPOINT-------------------\n\n";
-    test_method(solve_diff_eq_midpoint, "output_midpoint.csv");
+    test_method(solve_diff_eq_midpoint, "output_test_midpoint.csv");
     std::cout<<"\n\n";
     
     std::cout<<"TEST RUNGE KUTTY-------------------\n\n";
-    test_method(solve_diff_eq_runge_kutty, "output_runge_kutty.csv");
+    test_method(solve_diff_eq_runge_kutty, "output_test_runge_kutty.csv");
     std::cout<<"\n\n";
 }

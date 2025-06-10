@@ -93,7 +93,7 @@ double solve_nonlinear_newton(double (*f)(double), double y0){
 }
 
 double solve_nonlinear_secant(double (*f)(double), double y0, double y_p){
-    const double PERTURBATION = 1e-6;
+    // const double PERTURBATION = 1e-6;
 
     for (int i = 0; i < ITERATION_LIMIT; ++i){
         count_secant++;
@@ -135,10 +135,6 @@ double solve_nonlinear_secant(double (*f)(double), double y0, double y_p){
 
 double solve_nonlinear_bisection(double (*f)(double), double a, double b){
     // jesli funkcja nad, badz pod osia
-    // if (f(a) * f(b) > 0) {
-    //     return std::numeric_limits<double>::quiet_NaN();
-    // }
-
     if(!(f(a) * f(b) < 0)){
         return std::numeric_limits<double>::quiet_NaN();
     }
@@ -165,15 +161,6 @@ double solve_nonlinear_regula_falsi(double (*f)(double), double a, double b){
         return std::numeric_limits<double>::quiet_NaN();
     }
 
-    // double f_a = f(a);
-    // double f_b = f(b);
-
-    // double denom = f_b - f_a;
-    // if (std::abs(denom) < EPSILON) {
-    //     return std::numeric_limits<double>::quiet_NaN();
-    // }
-
-    // double x1 = (a * f_b - b * f_a) / denom;
     double x1;
 
     for (size_t i = 0; i < ITERATION_LIMIT; i++){ 
