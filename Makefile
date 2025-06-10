@@ -1,66 +1,62 @@
-CXX = g++
-CXXFLAGS = -std=c++17 -Wall -Wextra -g
-LDFLAGS =
+# Compiler and flags
+CXX        := g++
+CXXFLAGS   := -std=c++17 -Wall -Wextra -g
+LDFLAGS    :=
 
-INCLUDE_DIR = include
-SRC_DIR = src
-TEST_SRC_DIR = tests
-OBJ_DIR = obj
-BIN_DIR = bin
+# Directories
+IDIR       := include
+SDIR       := src
+TDIR       := tests
+ODIR       := obj
+BDIR       := bin
 
-APP_NAME = app
+# Target executable name
+TARGET     := run_tests
+EXECUTABLE := $(BDIR)/$(TARGET)
 
-SRCS = $(wildcard $(SRC_DIR)/*.cpp)
-TEST_SRCS = $(wildcard $(TEST_SRC_DIR)/*.cpp)
+# Include path flag
+INCLUDES   := -I$(IDIR)
 
-OBJS = $(patsubst $(SRC_DIR)/%.cpp, $(OBJ_DIR)/%.o, $(SRCS))
-TEST_OBJS = $(patsubst $(TEST_SRC_DIR)/%.cpp, $(OBJ_DIR)/%.o, $(TEST_SRCS))
+# VPATH tells 'make' where to look for source files
+VPATH := $(SDIR):$(TDIR)
 
-TEST_BINS = $(patsubst $(TEST_SRC_DIR)/%.cpp, $(BIN_DIR)/%, $(TEST_SRCS))
+# Automatically find all .cpp source files in the source and tests directories
+SOURCES := $(wildcard $(SDIR)/*.cpp) $(wildcard $(TDIR)/*.cpp)
 
-MAIN_TARGET = $(BIN_DIR)/$(APP_NAME)
+# Generate corresponding object file names, placing them in the ODIR directory
+OBJECTS := $(patsubst %.cpp,$(ODIR)/%.o,$(notdir $(SOURCES)))
 
-DEPS = $(OBJS:.o=.d) $(TEST_OBJS:.o=.d)
+# --- Makefile Rules ---
 
-.PHONY: all clean directories tests run_tests
+# Default target: build the executable
+all: $(EXECUTABLE)
 
-all: directories $(MAIN_TARGET) $(TEST_BINS)
+# Rule to run the executable
+run: all
+	@echo "--- Running executable ---"
+	./$(EXECUTABLE)
+	@echo "--------------------------"
 
-tests: directories $(TEST_BINS)
+# Rule to link all object files into the final executable
+$(EXECUTABLE): $(OBJECTS) | $(BDIR)
+	@echo "Linking..."
+	$(CXX) $(CXXFLAGS) -o $@ $^ $(LDFLAGS)
 
-directories: $(OBJ_DIR) $(BIN_DIR)
+# Pattern rule to compile .cpp files into .o object files
+# It finds sources via VPATH and places objects in ODIR.
+$(ODIR)/%.o: %.cpp | $(ODIR)
+	@echo "Compiling $<..."
+	$(CXX) $(CXXFLAGS) $(INCLUDES) -c $< -o $@
 
-$(OBJ_DIR):
-	@mkdir -p $(OBJ_DIR)
+# Rule to create the bin and obj directories if they don't exist
+# This is an "order-only prerequisite"
+$(BDIR) $(ODIR):
+	mkdir -p $@
 
-$(BIN_DIR):
-	@mkdir -p $(BIN_DIR)
-
-$(MAIN_TARGET): $(OBJS) | $(BIN_DIR)
-	$(CXX) $(CXXFLAGS) $^ -o $@ $(LDFLAGS)
-
-$(TEST_BINS): $(BIN_DIR)/%: $(OBJ_DIR)/%.o $(OBJS) | $(BIN_DIR)
-	$(CXX) $(CXXFLAGS) $^ -o $@ $(LDFLAGS)
-
-$(OBJS): $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp | $(OBJ_DIR)
-	$(CXX) $(CXXFLAGS) -I$(INCLUDE_DIR) -MMD -MP -c $< -o $@
-
-$(TEST_OBJS): $(OBJ_DIR)/%.o: $(TEST_SRC_DIR)/%.cpp | $(OBJ_DIR)
-	$(CXX) $(CXXFLAGS) -I$(INCLUDE_DIR) -MMD -MP -c $< -o $@
-
--include $(DEPS)
-
-run_tests: $(TEST_BINS)
-	@echo "Running tests..."
-	@for test_exe in $(TEST_BINS); do \
-		echo "--- Running $$test_exe ---"; \
-		./$$test_exe; \
-		if [ $$? -ne 0 ]; then \
-			echo "*** Test $$test_exe FAILED ***"; \
-			exit 1; \
-		fi; \
-	done
-	@echo "All tests passed."
-
+# Rule to clean up generated files
 clean:
-	rm -rf $(OBJ_DIR) $(BIN_DIR) $(APP_NAME)
+	@echo "Cleaning up..."
+	rm -rf $(ODIR) $(BDIR)
+
+# Declare phony targets that are not actual files
+.PHONY: all run clean
