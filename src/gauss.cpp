@@ -65,7 +65,7 @@ void check_precision(double A[MAXN][MAXN+1], int n, double x[MAXN]) {
     }
 }
 
-void solve_linear_equation(FunctionData data){
+void solve_lin_eq(FunctionData data){
     int N = data.x.size();
     double A[MAXN][MAXN+1];
     double A_prim[MAXN][MAXN+1];
@@ -98,7 +98,7 @@ void solve_linear_equation(FunctionData data){
     check_precision(A_prim, N, x);
 }
 
-std::vector<double> solve_linear_equation(std::vector<std::vector<double>> matrix, std::vector<double> b, int N){
+std::vector<double> solve_lin_eq(std::vector<std::vector<double>> matrix, std::vector<double> b, int N){
     double A[MAXN][MAXN+1];
     double A_prim[MAXN][MAXN+1];
     double x[MAXN];
