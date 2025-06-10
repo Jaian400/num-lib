@@ -1,7 +1,7 @@
 #include "../include/differential_equation.hpp"
 
 std::vector <double> solve_diff_eq(std::pair <double, double> ab, double y0, double (*f)(double, double), int N){
-    solve_diff_eq_runge_kutty(N, ab, y0, f);
+    return solve_diff_eq_runge_kutty(N, ab, y0, f);
 }
 
 std::vector<double> solve_diff_eq_euler(int N, std::pair<double, double> ab, double y0, double (*f)(double, double)){
