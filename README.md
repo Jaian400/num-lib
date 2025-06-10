@@ -1,7 +1,3 @@
-Jasne, oto uproszczona dokumentacja, która skupia się na tym, co robią funkcje, bez wchodzenia w skomplikowane szczegóły matematyczne.
-
----
-
 # Dokumentacja Funkcji Numerycznych
 
 ## `approximate`
