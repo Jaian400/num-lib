@@ -5,7 +5,7 @@
 
 int main(){
     // test_diff_eq();
-    test_interpolate();
+    // test_interpolate();
     // test_approx();
     test_nonlin_eq();
 

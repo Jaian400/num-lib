@@ -278,12 +278,14 @@ void test_nonlin_eq_2(double tolerance){
     std::vector<double(*)(double)> funcs = {f1_neq, f2, f3, f4, f5, f6};
 
     std::vector<std::vector<double>> outputs_excepted;
-    outputs_excepted.push_back(); // 1
-    outputs_excepted.push_back(); // 2
-    outputs_excepted.push_back(); // 3
-    outputs_excepted.push_back(); // 4
-    outputs_excepted.push_back(); // 5
-    outputs_excepted.push_back(); // 6
+    outputs_excepted.push_back({0.348077}); // 1
+    outputs_excepted.push_back({-1.48417,0.03333518,1.72233}); // 2
+    outputs_excepted.push_back({-2.61753, -2.35654, -1.65084, -1.35934, -0.963027, -0.709429, -0.282375, -0.054708, 
+        0.394475, 0.602896, 1.069, 1.26239, 1.74198, 1.92319, 2.41386, 2.58495}); // 3
+    outputs_excepted.push_back({7.58E-17, 0.850651}); // 4
+    outputs_excepted.push_back({-1.03427, -0.722765, 0.722765, 1.03427}); // 5
+    outputs_excepted.push_back({-2.83333, -2.5, -2.16667, -1.83333, -1.5, -1.16667, -0.833333, -0.5, -0.166667, 
+        0.166667, 0.5, 0.833333, 1.16667, 1.5, 1.83333, 2.16667, 2.5, 2.83333}); // 6
 
     std::pair<double, double> ab = {-3, 3};
     std::vector<std::vector<double>> outputs;
@@ -291,8 +293,16 @@ void test_nonlin_eq_2(double tolerance){
     for (size_t i=0;i<funcs.size();i++){
         std::cout<<"\nTESTY DLA FUNKCJI NUMER "<< i+1 << "\n\n";
         outputs.push_back(solve_nonlin_eq(funcs[i],ab));
-        std::cout<<"Uzyskane wyniki\n";
+
+        if(outputs[i].size() != outputs_excepted[i].size()){
+            std::cout<<"TEST FAILED, num of roots of func "<< i+1 << "\n";
+            std::cout<<"Excpected: " << outputs_excepted[i].size() << ", got: " << outputs[i].size() << "\n";
+            return;
+        }
+
+        std::cout<<"Uzyskane wyniki:\n";
         for (int j= 0; j < outputs[i].size(); j++){
+            std::cout<<outputs[i][j]<<"\n";
             error_sum += abs(outputs[i][j] - outputs_excepted[i][j]);
             count++;
         }
