@@ -1,6 +1,10 @@
 #include "../include/differential_equation.hpp"
 
-std::vector<double> solve_differential_equation(int N, std::pair<double, double> ab, double y0, double (*f)(double, double)){
+std::vector <double> solve_diff_eq(int N, std::pair <double, double> ab, double y0, double (*f)(double, double)){
+    solve_diff_eq_runge_kutty(N, ab, y0, f);
+}
+
+std::vector<double> solve_diff_eq_euler(int N, std::pair<double, double> ab, double y0, double (*f)(double, double)){
     double x0 = ab.first;
     double h = (ab.second - ab.first) / N;
 
@@ -36,7 +40,7 @@ std::vector<std::pair<double, double>> solve_differential_equation_with_x(int N,
     return out;
 }
 
-std::vector<double> solve_heuna(int N, std::pair<double, double> ab, double y0, double (*f)(double, double)){
+std::vector<double> solve_diff_eq_heuna(int N, std::pair<double, double> ab, double y0, double (*f)(double, double)){
     double x0 = ab.first;
     double h = (ab.second - ab.first) / N;
 
@@ -52,7 +56,7 @@ std::vector<double> solve_heuna(int N, std::pair<double, double> ab, double y0, 
     return out;
 }
 
-std::vector<double> solve_midpoint(int N, std::pair<double, double> ab, double y0, double (*f)(double, double)){
+std::vector<double> solve_diff_eq_midpoint(int N, std::pair<double, double> ab, double y0, double (*f)(double, double)){
     double h = (ab.second - ab.first) / N;
     std::vector <double> out (N + 1);
     out[0] = y0;
@@ -65,7 +69,7 @@ std::vector<double> solve_midpoint(int N, std::pair<double, double> ab, double y
     return out;
 }
 
-std::vector<double> solve_runge_kutty(int N, std::pair<double, double> ab, double y0, double (*f)(double, double)){
+std::vector<double> solve_diff_eq_runge_kutty(int N, std::pair<double, double> ab, double y0, double (*f)(double, double)){
     double h = (ab.second - ab.first) / N;
     std::vector <double> out (N + 1);
     out[0] = y0;

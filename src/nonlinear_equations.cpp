@@ -221,57 +221,8 @@ std::vector<double> solve_nonlin_eq(double (*f)(double), std::pair<double, doubl
         x0.push_back(i+step);
     }
 
-    std::vector<double> output_newton;
-    std::vector<double> output_secant;
-    std::vector<double> output_bisection;
     std::vector<double> output_regula_falsi;
-   
-    for (size_t i = 0; i < x_p.size(); i++){
-        // if (f(x_p[i]) * f(x0[i]) < 0){
-        //     continue;
-        // }
-        double out = solve_nonlinear_newton(f, x_p[i]);
-        // std::cout<<"WYNIK DLA NEWTON NR W OTOCZENIU " << x0[i] <<" => " << out << "\n";
-        if(!std::isnan(out) && !value_in_vect(out, output_newton) && abs(f(out)) < 1000 * EPSILON
-                && out >= ab.first && out <= ab.second){
-            output_newton.push_back(out);
-        }
-    }
 
-    std::sort(output_newton.begin(), output_newton.end());
-    for (size_t i = 0; i < output_newton.size(); i++){
-        std::cout<< "NEWTON, " << i+1 << ", "<< output_newton[i] <<"\n";
-    }
-
-    for (size_t i = 0; i < x0.size(); i++){
-        // if (f(x_p[i]) * f(x0[i]) < 0){
-        //     continue;
-        // }
-        double out = solve_nonlinear_secant(f, x0[i], x_p[i]);
-        // std::cout<<"WYNIK DLA FUNKCJI NR " << i+1 << " W OTOCZENIU " << x0[j] <<" => " << out << "\n";
-        if(!std::isnan(out) && !value_in_vect(out, output_secant)&& abs(f(out)) < 1000 * EPSILON
-                && out >= ab.first && out <= ab.second){
-            output_secant.push_back(out);
-        }
-    }
-
-    std::sort(output_secant.begin(), output_secant.end());
-    for (size_t i = 0; i < output_secant.size(); i++){
-        std::cout << "SIECZNE, " << i+1 << ", "<< output_secant[i] <<"\n";
-    }    
-
-    for (size_t i = 0; i < x0.size(); i++){
-        double out = solve_nonlinear_bisection(f, x_p[i], x0[i]);
-        // std::cout<<"WYNIK DLA FUNKCJI NR " << i+1 << " W OTOCZENIU " << x0[j] <<" => " << out << "\n";
-        if(!std::isnan(out) && !value_in_vect(out, output_bisection)&& abs(f(out)) < 1000 * EPSILON
-                && out >= ab.first && out <= ab.second)
-            output_bisection.push_back(out);
-        }
-
-    for (size_t i = 0; i < output_bisection.size(); i++){
-        std::cout << "BISEKCJA, " << i+1 << ", "<< output_bisection[i] <<"\n";
-    }
-    
     for (size_t i = 0; i < x0.size(); i++){
         double out = solve_nonlinear_regula_falsi(f, x_p[i], x0[i]);
         if(!std::isnan(out) && !value_in_vect(out, output_regula_falsi)&& abs(f(out)) < 1000 * EPSILON
@@ -279,10 +230,10 @@ std::vector<double> solve_nonlin_eq(double (*f)(double), std::pair<double, doubl
             output_regula_falsi.push_back(out);
         }
 
-    for (size_t i = 0; i < output_regula_falsi.size(); i++){
-        std::cout << "REGULA FALSI, " << i+1 << ", "<< output_regula_falsi[i] << ", "<< f(output_regula_falsi[i]) <<"\n";
-    }  
+    // for (size_t i = 0; i < output_regula_falsi.size(); i++){
+    //     std::cout << "REGULA FALSI, " << i+1 << ", "<< output_regula_falsi[i] << ", "<< f(output_regula_falsi[i]) <<"\n";
+    // }  
 
-    return {};
+    return output_regula_falsi;
 }
 

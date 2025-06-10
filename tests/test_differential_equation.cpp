@@ -101,7 +101,7 @@ void test_euler(){
     // double y0 = 1;
     // int N = 500;
 
-    // std::vector <double> result = solve_differential_equation(N, ab, y0, f);
+    // std::vector <double> result = solve_diff_eq_euler(N, ab, y0, f);
     
     // if(test_passed(N, result, ab, g)){
     //     std::cout << "Acceptable error\n";
@@ -114,7 +114,7 @@ void test_euler(){
     T0 = 1 / std::pow(y0, 3);
     int N = 50;
 
-    std::vector <double> result = solve_differential_equation(N, ab, y0, T);
+    std::vector <double> result = solve_diff_eq_euler(N, ab, y0, T);
 
     if(test_passed(N, result, ab, T_s, "output_diff.csv")){
         // std::cout << "Acceptable error\n";
@@ -145,19 +145,19 @@ int main(){
     std::cout<<"\n";
 
     std::cout<<"TEST EULER-----------------\n\n";
-    test_method(solve_differential_equation, "output_euler.csv");
+    test_method(solve_diff_eq_euler, "output_euler.csv");
     std::cout<<"\n\n";
 
     std::cout<<"TEST HEUNA-----------------\n\n";
-    test_method(solve_heuna, "output_heuna.csv");
+    test_method(solve_diff_eq_heuna, "output_heuna.csv");
     std::cout<<"\n\n";
     
     std::cout<<"TEST MIDPOINT-------------------\n\n";
-    test_method(solve_midpoint, "output_midpoint.csv");
+    test_method(solve_diff_eq_midpoint, "output_midpoint.csv");
     std::cout<<"\n\n";
     
     std::cout<<"TEST RUNGE KUTTY-------------------\n\n";
-    test_method(solve_runge_kutty, "output_runge_kutty.csv");
+    test_method(solve_diff_eq_runge_kutty, "output_runge_kutty.csv");
     std::cout<<"\n\n";
 
     return 0;
