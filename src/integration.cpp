@@ -49,27 +49,6 @@ double integrate(int n, double (*f)(double), std::pair <double, double> ab){
 }
 
 
-// int main(){
-//     // function data = load_data("d.txt");
-//     FunctionData data = load_data("kwadratury_gr_4.txt");
-//     print_input(data);
-
-//     int degree = data.N; 
-//     std::vector<double> ai = data.x;
-//     std::pair<double, double> ab = {data.fx[0], data.fx[1]};
-//     // std::pair<double, double> ab = {3.5, 6.5296812439344};
-
-//     std::ofstream outputFile("output.csv");
-
-//     for (size_t i = 10; i < 100; i++)
-//     {
-//         integrate(i, ai, ab);
-//     }
-//     outputFile.close();
-
-//     return 0;
-// }
-
 double simpson(int n, std::vector <double> x, double (*f)(double)){
     double sum1 = 0.f;
     double sum2 = 0.f;
