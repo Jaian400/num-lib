@@ -1,6 +1,6 @@
 # Spis Treści
 1.  [`approximate`](#approximate)
-2.  [`solve_diff_eq_runge_kutty`](#solve_diff_eq_runge_kutty)
+2.  [`solve_diff_eq`](#solve_diff_eq)
 3.  [`solve_lin_eq`](#solve_lin_eq)
 4.  [`interpolate`](#interpolate)
 5.  [`solve_nonlin_eq`](#solve_nonlin_eq)
