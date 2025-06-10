@@ -24,11 +24,11 @@ std::vector<double> approximate(std::pair<double, double> ab, double (*f)(double
         counter = i;
         for (size_t j = 0; j < N; j++){
             counter = i + j;
-            matrix[i][j] = integrate(INTEGRATION_N, base_func, ab);
+            matrix[i][j] = integrate(base_func, ab, INTEGRATION_N);
         }
 
         counter = i;
-        b[i] = integrate(INTEGRATION_N, base_times_func, ab);
+        b[i] = integrate(base_times_func, ab, INTEGRATION_N);
     }
 
     return solve_lin_eq(matrix, b, N);
