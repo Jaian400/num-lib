@@ -3,6 +3,26 @@
 #include <iostream>
 #include <iomanip>
 
+double interpolate(std::vector<double> x, std::vector<double> f, int n, double xp) {
+    double result = 0.0;
+
+    for (int i = 0; i < n; i++) {
+        double l = f[i];
+        for (int j = 0; j < n; j++) {
+            if (i != j) {
+                l *= (xp - x[j]) / (x[i] - x[j]);
+            }
+        }
+        result += l;
+    }
+    return result;
+}
+
+double interpolate(std::vector<double> x, std::vector<double> f, double xp) {
+    int n = x.size();
+    return interpolate(x, f, n, xp);
+}
+
 double interpolate(const FunctionData& data, double userInput, int n) {
     double output = 0.0;
 
