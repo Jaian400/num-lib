@@ -46,7 +46,7 @@ double f1 (double x){
     return std::exp(x) * std::cos(5 * x) - std::pow(x, 3);
 }
 
-int main(){
+void test_approx(){
     std::vector<double> base;
     std::pair<double, double> ab = {-1, 2};
     // std::pair<double, double> ab = {0, M_PI/2};

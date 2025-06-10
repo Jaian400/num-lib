@@ -1,6 +1,6 @@
 #include "../include/nonlinear_equations.hpp"
 
-double f1(double x){
+double f1_neq(double x){
     if (x <= -1.0 || x == -3.0) {
         return std::numeric_limits<double>::quiet_NaN();
     }
@@ -53,12 +53,11 @@ double f6(double x){
     if(x == -1){
         return std::numeric_limits<double>::quiet_NaN();
     }
-
     return cos(3 * M_PI * x) / (x+1);
 }
 
-int test_nonlin_eq(){
-    std::vector<double(*)(double)> funcs = {f1, f2, f3};
+int test_nonlin_eq_old(){
+    std::vector<double(*)(double)> funcs = {f1_neq, f2, f3};
     std::vector<double(*)(double)> prims = {f1_prim, f2_prim, f3_prim};
     std::vector<double> x0;
     std::vector<double> x_p;
@@ -270,7 +269,7 @@ void test_bis(double (*f)(double)){
 }
 
 void test_nonlin_eq_2(){
-    // std::vector<double(*)(double)> funcs = {f1, f2, f3};
+    // std::vector<double(*)(double)> funcs = {f1_neq, f2, f3};
     // std::pair<double, double> ab = {-3, 4};
 
     std::vector<double(*)(double)> funcs = {f4, f5, f6};
@@ -282,33 +281,33 @@ void test_nonlin_eq_2(){
     }
 }
 
-void generate_points(){
-    std::ofstream out_file("nlin_graphs.csv");
-    for (double i = -3; i < 4; i+=0.01){
-        out_file << i <<","<< f1(i)<<","
-                << f2(i)<<","
-                << f3(i)<<"\n";
-    }
-    out_file.close();
-}
+// void generate_points(){
+//     std::ofstream out_file("nlin_graphs.csv");
+//     for (double i = -3; i < 4; i+=0.01){
+//         out_file << i <<","<< f1_neq(i)<<","
+//                 << f2(i)<<","
+//                 << f3(i)<<"\n";
+//     }
+//     out_file.close();
+// }
 
-void method_steps(double(*f)(double)){
-    std::cout<<"\nBisekcja\n";
-    solve_nonlinear_bisection(f, 1.06, 1.07);
-    std::cout<<"\nNewton\n";
-    solve_nonlinear_newton(f, 1.06);
-    std::cout<<"\nSieczne\n";
-    solve_nonlinear_secant(f, 1.07, 1.06);
-}
+// void method_steps(double(*f)(double)){
+//     std::cout<<"\nBisekcja\n";
+//     solve_nonlinear_bisection(f, 1.06, 1.07);
+//     std::cout<<"\nNewton\n";
+//     solve_nonlinear_newton(f, 1.06);
+//     std::cout<<"\nSieczne\n";
+//     solve_nonlinear_secant(f, 1.07, 1.06);
+// }
 
-void test_regula_falsi(){
-    std::vector<double(*)(double)> funcs = {f4, f5, f6};
-    std::pair<double, double> ab = {-3, 3};
+// void test_regula_falsi(){
+//     std::vector<double(*)(double)> funcs = {f4, f5, f6};
+//     std::pair<double, double> ab = {-3, 3};
 
-    solve_nonlinear_regula_falsi(f4, -3, 3);
-}
+//     solve_nonlinear_regula_falsi(f4, -3, 3);
+// }
 
-int main(){
+void test_nonlin_eq(){
     // std::cout << "f3(0) = " << f3(0.0) << std::endl;
     // return 0;
     // test_nonlin_eq();
@@ -327,6 +326,4 @@ int main(){
     std::cout<<"Calkowita liczba wykonanych petli dla metody falszywej linii -> " << count_regula_falsi << "\n";
 
     // test_regula_falsi();
-
-    return 0;
 }

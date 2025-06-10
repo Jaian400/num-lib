@@ -140,7 +140,7 @@ void test_method(std::vector<double> (*method)(int, std::pair<double, double>, d
     }
 }
 
-int main(){
+void test_diff_eq(){
 
     std::cout<<"\n";
 
@@ -159,6 +159,4 @@ int main(){
     std::cout<<"TEST RUNGE KUTTY-------------------\n\n";
     test_method(solve_diff_eq_runge_kutty, "output_runge_kutty.csv");
     std::cout<<"\n\n";
-
-    return 0;
 }

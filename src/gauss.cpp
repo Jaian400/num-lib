@@ -3,13 +3,15 @@
 
 void print_matrix(int N, double A[MAXN][MAXN+1]){
     for(int i = 0; i < N;i++){
-        for (int j = 0; j < N+1; j++)
+        for (int j = 0; j < N; j++)
         {
-            std::cout<<A[i][j]<< "\t";\
+            std::cout<<std::setw(8)<<A[i][j]<< "\t";\
         }
         std::cout<<"\n";
     }
+    std::cout<<"\n";
 }
+
 
 void partial_pivot(double A[MAXN][MAXN+1], int n) {
     for (int i = 0; i < n; i++) {
@@ -46,7 +48,7 @@ void back_substitute(double A[MAXN][MAXN+1], int n, double x[MAXN]) {
     }
 }
 
-void check_precision(double A[MAXN][MAXN+1], int n, double x[MAXN]) {
+void check_precision_gauss(double A[MAXN][MAXN+1], int n, double x[MAXN]) {
     std::cout << "\nSprawdzanie dokladnosci rozwiazania:\n";
     
     for (int i = 0; i < n; i++) {
@@ -95,7 +97,7 @@ void solve_linear_equation(FunctionData data){
         std::cout << x[i] << "\n";
     }
 
-    check_precision(A_prim, N, x);
+    check_precision_gauss(A_prim, N, x);
 }
 
 std::vector<double> solve_linear_equation(std::vector<std::vector<double>> matrix, std::vector<double> b, int N){
