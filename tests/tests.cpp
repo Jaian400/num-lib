@@ -3,7 +3,9 @@
 #include "test_nonlin_eq.hpp"
 
 int main(){
-    test_diff_eq();
+    // test_diff_eq();
     // test_approx();
+    test_nonlin_eq();
+    
     return 0;
 }

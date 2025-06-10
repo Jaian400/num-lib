@@ -14,8 +14,7 @@ double base_times_func(double x) {
     return pow(x, counter) * original_function(x);
 }
 
-std::vector<double> approximate(std::vector <double>base, std::pair<double, double> ab, double (*f)(double)){
-    int N = base.size();
+std::vector<double> approximate(std::pair<double, double> ab, double (*f)(double), int N){
     std::vector<std::vector<double>> matrix(N, std::vector<double>(N));
     std::vector<double>b(N);
 

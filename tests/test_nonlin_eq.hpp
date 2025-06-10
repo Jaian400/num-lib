@@ -268,16 +268,42 @@ void test_bis(double (*f)(double)){
     }  
 }
 
-void test_nonlin_eq_2(){
+void test_nonlin_eq_2(double tolerance){
     // std::vector<double(*)(double)> funcs = {f1_neq, f2, f3};
     // std::pair<double, double> ab = {-3, 4};
 
-    std::vector<double(*)(double)> funcs = {f4, f5, f6};
+    double error_sum = 0;
+    int count = 0;
+
+    std::vector<double(*)(double)> funcs = {f1_neq, f2, f3, f4, f5, f6};
+
+    std::vector<std::vector<double>> outputs_excepted;
+    outputs_excepted.push_back(); // 1
+    outputs_excepted.push_back(); // 2
+    outputs_excepted.push_back(); // 3
+    outputs_excepted.push_back(); // 4
+    outputs_excepted.push_back(); // 5
+    outputs_excepted.push_back(); // 6
+
     std::pair<double, double> ab = {-3, 3};
+    std::vector<std::vector<double>> outputs;
 
     for (size_t i=0;i<funcs.size();i++){
         std::cout<<"\nTESTY DLA FUNKCJI NUMER "<< i+1 << "\n\n";
-        solve_nonlin_eq(funcs[i],ab);
+        outputs.push_back(solve_nonlin_eq(funcs[i],ab));
+        std::cout<<"Uzyskane wyniki\n";
+        for (int j= 0; j < outputs[i].size(); j++){
+            error_sum += abs(outputs[i][j] - outputs_excepted[i][j]);
+            count++;
+        }
+    }
+
+    double mean_error = error_sum / count;
+
+    if(mean_error < tolerance){
+        std::cout<<"TEST PASSED\n";
+    } else {
+        std::cout<<"TEST FAILED\n";
     }
 }
 
@@ -319,11 +345,12 @@ void test_nonlin_eq(){
     // return 0;
     // method_steps(f3);
 
-    test_nonlin_eq_2();
-    std::cout<<"Calkowita liczba wykonanych petli dla metody Newtona -> " << count_newton << "\n";
-    std::cout<<"Calkowita liczba wykonanych petli dla metody siecznych -> " << count_secant << "\n";
-    std::cout<<"Calkowita liczba wykonanych petli dla metody bisekcji -> " << count_bisection << "\n";
-    std::cout<<"Calkowita liczba wykonanych petli dla metody falszywej linii -> " << count_regula_falsi << "\n";
+    double tolerance = 0.01;
+    test_nonlin_eq_2(tolerance);
+    // std::cout<<"Calkowita liczba wykonanych petli dla metody Newtona -> " << count_newton << "\n";
+    // std::cout<<"Calkowita liczba wykonanych petli dla metody siecznych -> " << count_secant << "\n";
+    // std::cout<<"Calkowita liczba wykonanych petli dla metody bisekcji -> " << count_bisection << "\n";
+    // std::cout<<"Calkowita liczba wykonanych petli dla metody falszywej linii -> " << count_regula_falsi << "\n";
 
     // test_regula_falsi();
 }
