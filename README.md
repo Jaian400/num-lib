@@ -1,3 +1,12 @@
+# Spis Treści
+1.  [`approximate`](#approximate)
+2.  [`solve_diff_eq_runge_kutty`](#solve_diff_eq_runge_kutty)
+3.  [`solve_lin_eq`](#solve_lin_eq)
+4.  [`interpolate`](#interpolate)
+5.  [`solve_nonlin_eq`](#solve_nonlin_eq)
+
+---
+
 # Dokumentacja Funkcji Numerycznych
 
 ## `approximate`
@@ -25,12 +34,12 @@ Funkcja tworzy i rozwiązuje specjalny układ równań liniowych. Rozwiązanie t
 
 ---
 
-## `solve_diff_eq`
+## `solve_diff_eq_runge_kutty`
 
 Rozwiązuje równanie różniczkowe typu `y' = f(x, y)`. Innymi słowy, znając pochodną funkcji (`y'`) i jej punkt startowy, funkcja odtwarza jej przybliżony przebieg.
 
 ```cpp
-std::vector<double> solve_diff_eq(
+std::vector<double> solve_diff_eq_runge_kutty(
     int N,
     std::pair<double, double> ab,
     double y0,
