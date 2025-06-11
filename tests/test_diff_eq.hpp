@@ -138,8 +138,7 @@ void test_method(std::vector<double> (*method)(int, std::pair<double, double>, d
 }
 
 void test_diff_eq(){
-
-    // std::cout<<"\n";
+    std::cout << "--------------------- RUNNING DIFFERENTIAL EQUATION TEST ---------------------" << std::endl;
 
     // std::cout<<"TEST EULER-----------------\n\n";
     // test_method(solve_diff_eq_euler, "output_test_euler.csv");

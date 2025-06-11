@@ -1,6 +1,7 @@
 #include "../include/integration.hpp"
 
 void test_integration(){
+    std::cout << "--------------------- RUNNING INTEGRATION TEST -------------------------------" << std::endl;
     double tolerance = 0.0001;
 
     std::vector<double> ai_1 = {-2, 0, 5, 9, 1};

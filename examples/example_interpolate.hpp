@@ -1,4 +1,5 @@
 void example_interpolate(){
+    std::cout << "--------------------- RUNNING INTERPOLATION EXAMPLE --------------------------" << std::endl;
     std::cout << std::fixed << std::setprecision(2);
     std::cout << "--- Example: Interpolation (interpolate) ---" << std::endl;
     std::cout << "This example interpolates a temperature value based on a given set of measurements." << std::endl;
