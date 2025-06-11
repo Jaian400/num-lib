@@ -2,7 +2,7 @@
 Jest to zbiór funkcji w języku C++, implementujących popularne metody numeryczne. Biblioteka została stworzona w celu dostarczenia gotowych do użycia narzędzi do rozwiązywania licznych problemów matematycznych i inżynierskich, które często wymagają podejścia numerycznego. Każda funkcja jest zaprojektowana z myślą o łatwości użycia w projektach akademickich, naukowych lub hobbystycznych.
 
 # Spis Treści
-0.  [`instalacja`](#instalacja)
+0.  [`Instalacja`](#Instalacja)
 1.  [`approximate`](#approximate)
 2.  [`solve_diff_eq`](#solve_diff_eq)
 3.  [`solve_lin_eq`](#solve_lin_eq)
