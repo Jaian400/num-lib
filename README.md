@@ -1,12 +1,62 @@
+# Biblioteka Metod Numerycznych w C++
+Jest to zbiór funkcji w języku C++, implementujących popularne metody numeryczne. Biblioteka została stworzona w celu dostarczenia gotowych do użycia narzędzi do rozwiązywania licznych problemów matematycznych i inżynierskich, które często wymagają podejścia numerycznego. Każda funkcja jest zaprojektowana z myślą o łatwości użycia w projektach akademickich, naukowych lub hobbystycznych.
+
 # Spis Treści
-1.  [`approximate`](#approximate)
-2.  [`solve_diff_eq`](#solve_diff_eq)
-3.  [`solve_lin_eq`](#solve_lin_eq)
-4.  [`interpolate`](#interpolate)
-5.  [`solve_nonlin_eq`](#solve_nonlin_eq)
-6.  [`integrate`](#integrate)
+0.  [`Instalacja`](#Instalacja)
+1.  [`Przykład użycia`](#Przykład_użycia)
+2.  [`approximate`](#approximate)
+3.  [`solve_diff_eq`](#solve_diff_eq)
+4.  [`solve_lin_eq`](#solve_lin_eq)
+5.  [`interpolate`](#interpolate)
+6.  [`solve_nonlin_eq`](#solve_nonlin_eq)
+7.  [`integrate`](#integrate)
 
 ---
+
+## Instalacja
+Pobrać pełny folder num-lib i umieścić w swoim folderze bibliotek. Następnie w kodzie zaimportować "num-lib/num-lib.hpp".
+
+```cpp
+#include "num-lib/num-lib.hpp"
+
+int main(){
+    ...
+    output = approximate(ab, f1);
+    ...
+}
+```
+
+W celu rekompilacji wywołać polecenie:
+```bash
+>> make
+```
+
+## Przykład_użycia
+Przykład ten oraz dodatkowy można znaleźć w folderze examples/.
+
+```cpp
+void example_interpolate(){
+    std::cout << "--------------------- RUNNING INTERPOLATION EXAMPLE --------------------------" << std::endl;
+    std::cout << std::fixed << std::setprecision(2);
+    std::cout << "--- Example: Interpolation (interpolate) ---" << std::endl;
+    std::cout << "This example interpolates a temperature value based on a given set of measurements." << std::endl;
+    std::vector<double> hours = {0.0, 2.0, 4.0, 6.0};
+    std::vector<double> temps = {15.0, 19.0, 18.0, 22.0};
+    double hour_to_check = 3.5;
+
+    std::cout << "Input data (hours): ";
+    for(double h : hours) std::cout << h << "h ";
+    std::cout << std::endl;
+    
+    std::cout << "Input data (temperatures): ";
+    for(double t : temps) std::cout << t << "C ";
+    std::cout << std::endl;
+
+    double interpolated_temp = interpolate(hours, temps, hours.size(), hour_to_check);
+    std::cout << "\nEstimated temperature at hour " << hour_to_check << " is: " << interpolated_temp << " C" << std::endl;
+    std::cout << "--------------------------------------------------\n" << std::endl;
+}
+```
 
 # Dokumentacja
 

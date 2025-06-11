@@ -1,0 +1,6 @@
+#include "include/approximation.hpp"
+#include "include/differential_equation.hpp"
+#include "include/integration.hpp"
+#include "include/linear_equations.hpp"
+#include "include/nonlinear_equations.hpp"
+#include "include/interpolation.hpp"
