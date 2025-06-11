@@ -9,7 +9,7 @@ double integrate(std::vector <double> ai, std::pair <double, double> ab, int n){
     h = (ab.second - ab.first)/(2*n);
     // std::cout<<"h -> " << h<<"\n";
     // std::cout<<"x -> ";
-    for (int i = 0; i <= 2*n; ++i)
+    for (int i = 0; i <= 2*n; i++)
     {
         x.push_back(ab.first + i*h);
         // std::cout<<x[i]<<" ";

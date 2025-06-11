@@ -301,7 +301,7 @@ void test_nonlin_eq_2(double tolerance){
         }
 
         std::cout<<"Uzyskane wyniki:\n";
-        for (int j= 0; j < outputs[i].size(); j++){
+        for (size_t j= 0; j < outputs[i].size(); j++){
             std::cout<<outputs[i][j]<<"\n";
             error_sum += abs(outputs[i][j] - outputs_excepted[i][j]);
             count++;

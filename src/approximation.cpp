@@ -20,9 +20,9 @@ std::vector<double> approximate(std::pair<double, double> ab, double (*f)(double
 
     original_function = f;
 
-    for (size_t i = 0; i < N; i++){
+    for (int i = 0; i < N; i++){
         counter = i;
-        for (size_t j = 0; j < N; j++){
+        for (int j = 0; j < N; j++){
             counter = i + j;
             matrix[i][j] = integrate(base_func, ab, INTEGRATION_N);
         }
@@ -31,7 +31,7 @@ std::vector<double> approximate(std::pair<double, double> ab, double (*f)(double
         b[i] = integrate(base_times_func, ab, INTEGRATION_N);
     }
 
-    return solve_lin_eq(matrix, b, N);
+    return solve_lin_eq(matrix, b);
 }
 
 // auto basis_product = [i, j](double x) {
