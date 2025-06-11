@@ -51,12 +51,8 @@ double solve_nonlinear_regula_falsi(double (*f)(double), double a, double b);
 // Solve nonlinear equation - find all function roots in interval
 // f - function to solve
 // [a, b] - examined interval
-std::vector<double> solve_nonlin_eq(double (*f)(double), std::pair<double, double> ab);
-// Solve nonlinear equation - find roots of a function
-// f - function to solve
-// [a, b] - examined interval
 // step - discretization interval size - the smallest interval that will be examined
-std::vector<double> solve_nonlin_eq(double (*f)(double), std::pair<double, double> ab, double step);
+std::vector<double> solve_nonlin_eq(double (*f)(double), std::pair<double, double> ab, double step=0.01);
 
 // ------------------------HELPERS-------------------------------
 

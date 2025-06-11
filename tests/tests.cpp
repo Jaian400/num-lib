@@ -3,6 +3,7 @@
 #include "test_nonlin_eq.hpp"
 #include "test_lin_eq.hpp"
 #include "test_interpolate.hpp"
+#include "test_integration.hpp"
 
 #include "../examples/example_interpolate.hpp"
 #include "../examples/example_solve_diff_eq.hpp"
@@ -21,6 +22,7 @@ int main(){
 
     // example_interpolate();
     // example_solve_diff_eq();
+    test_integration();
 
     return 0;
 }
