@@ -3,7 +3,7 @@ Jest to zbiór funkcji w języku C++, implementujących popularne metody numeryc
 
 # Spis Treści
 0.  [`Instalacja`](#Instalacja)
-1.  [`Przykład użycia`](#Przykład użycia)
+1.  [`Przykład użycia`](#Przykład_użycia)
 2.  [`approximate`](#approximate)
 3.  [`solve_diff_eq`](#solve_diff_eq)
 4.  [`solve_lin_eq`](#solve_lin_eq)
@@ -31,7 +31,7 @@ W celu rekompilacji wywołać polecenie:
 >> make
 ```
 
-## Przykład użycia
+## Przykład_użycia
 Przykład ten oraz dodatkowy znajdziesz w folderze examples/.
 
 ```cpp
