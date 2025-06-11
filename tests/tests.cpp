@@ -19,10 +19,11 @@ int main(){
     test_nonlin_eq();    
     std::cout << "--------------------- RUNNING LINEAR EQUATION SYSTEM TEST --------------------" << std::endl;
     test_lin_eq();
+    std::cout << "--------------------- RUNNING INTEGRATION TEST --------------------" << std::endl;
+    test_integration();
 
     // example_interpolate();
     // example_solve_diff_eq();
-    test_integration();
 
     return 0;
 }

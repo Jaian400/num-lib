@@ -3,8 +3,6 @@
 void test_integration(){
     double tolerance = 0.0001;
 
-    std::cout << "RUNNING INTEGRATION TEST\n\n";
-
     std::vector<double> ai_1 = {-2, 0, 5, 9, 1};
     std::pair<double, double> ab_1 = {-2, 2};
     double output_1_excpected = 472.0/15.0;

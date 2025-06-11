@@ -4,7 +4,7 @@
 #include <fstream>
 
 void verify_approximation(const std::vector<double>& coeffs, double (*f)(double), std::pair<double, double> ab, double tolerance) {
-    std::ofstream output_csv("output_aprox.csv");
+    std::ofstream output_csv("output_test_aprox.csv");
     if (!output_csv.is_open()) {
         std::cerr << "Error, cannot open file\n"; 
         return;
@@ -14,10 +14,10 @@ void verify_approximation(const std::vector<double>& coeffs, double (*f)(double)
     double h = (ab.second - ab.first) / N;
     double error_sum = 0;
 
-    std::cout << std::setw(15) << "testing x" << 
-                    std::setw(15) << "precised" << 
-                    std::setw(15) << "aprox" <<
-                    std::setw(15) << "error" << "\n";
+    // std::cout << std::setw(15) << "testing x" << 
+    //                 std::setw(15) << "precised" << 
+    //                 std::setw(15) << "aprox" <<
+    //                 std::setw(15) << "error" << "\n";
 
     for (int i = 0; i <= N; ++i) {
         double x = ab.first + i * h;
@@ -26,10 +26,10 @@ void verify_approximation(const std::vector<double>& coeffs, double (*f)(double)
         double error = std::abs(fx - ax);
         error_sum += error;
         // << std::fixed << std::setprecision(5)
-        std::cout << std::setw(15) << x << 
-                    std::setw(15) << fx << 
-                    std::setw(15) << ax <<
-                    std::setw(15) << error << "\n";
+        // std::cout << std::setw(15) << x << 
+        //             std::setw(15) << fx << 
+        //             std::setw(15) << ax <<
+        //             std::setw(15) << error << "\n";
 
         output_csv << x << 
                     "," << fx << 
@@ -66,10 +66,10 @@ void test_approx(){
 
     std::vector<double> output = approximate(ab, f1);
 
-    for (double o : output){
-        std::cout << o << "\n";
-    }
+    // for (double o : output){
+    //     std::cout << o << "\n";
+    // }
     
-    std::cout << "\nAPPROXIMATION TEST \n";
+    // std::cout << "\nAPPROXIMATION TEST \n";
     verify_approximation(output, f1, ab, 0.001);
 }

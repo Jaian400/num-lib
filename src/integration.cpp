@@ -77,7 +77,7 @@ double subdivided_quadrature(int n, std::vector<double> wi, std::vector<double> 
 
 double quadrature(double (*f)(double), std::vector <double> xi, std::vector <double> wi, std::pair <double, double> ab){
     double sum = 0.f;
-    for (int i=0; i<xi.size(); i++){
+    for (int i=0; i<int(xi.size()); i++){
         sum += wi[i] * f(((ab.second - ab.first) * xi[i] + (ab.second + ab.first)) * 0.5f);
     }
 
@@ -122,13 +122,13 @@ double calculate_f(std::vector<double> ai, double x){
 void print_input(FunctionData data){
     std::cout<<"n -> "<<data.N<<"\n";
     std::cout<<"ai -> ";
-    for (int i = 0; i < data.x.size(); i++)
+    for (int i = 0; i < int(data.x.size()); i++)
     {
         std::cout<<data.x[i]<<" ";
     }
     std::cout<<"\n";
     std::cout<<"a, b -> ";
-    for (int i = 0; i < data.fx.size(); i++)
+    for (int i = 0; i < int(data.fx.size()); i++)
     {
         std::cout<<data.fx[i]<<" ";
     }
