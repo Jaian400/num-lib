@@ -1,4 +1,4 @@
-#include "../include/gauss.hpp"
+#include "../include/linear_equations.hpp"
 #include <math.h>
 
 void print_matrix(int N, double A[MAXN][MAXN+1]){

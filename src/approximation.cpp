@@ -1,6 +1,6 @@
 #include "../include/approximation.hpp"
 #include "../include/integration.hpp"
-#include "../include/gauss.hpp"
+#include "../include/linear_equations.hpp"
 #include <functional>
 #include <cmath>
 #include <vector>
