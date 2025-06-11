@@ -1,9 +1,8 @@
 #include "../include/integration.hpp"
 
 void test_integration(){
+    std::cout << "--------------------- RUNNING INTERGRATION TEST ------------------------------" << std::endl;
     double tolerance = 0.0001;
-
-    std::cout << "RUNNING INTEGRATION TEST\n\n";
 
     std::vector<double> ai_1 = {-2, 0, 5, 9, 1};
     std::pair<double, double> ab_1 = {-2, 2};

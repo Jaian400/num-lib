@@ -344,6 +344,7 @@ void test_nonlin_eq_2(double tolerance){
 // }
 
 void test_nonlin_eq(){
+    std::cout << "--------------------- RUNNING NONLINEAR EQUATION TEST ------------------------" << std::endl;
     // std::cout << "f3(0) = " << f3(0.0) << std::endl;
     // return 0;
     // test_nonlin_eq();

@@ -40,6 +40,7 @@ void test_interpolation_between_points() {
     }}
 
 void test_interpolate(){
+    std::cout << "--------------------- RUNNING INTERPOLATION TEST -----------------------------" << std::endl;
     test_interpolation_at_known_point();
     test_interpolation_between_points();
 }

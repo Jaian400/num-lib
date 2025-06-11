@@ -4,6 +4,7 @@ double func_decay(double x ,double y) {
 }
 
 void example_solve_diff_eq(){
+    std::cout << "--------------------- RUNNING DIFFERENTIAL EQUATION EXAMPLE ------------------" << std::endl;
     std::cout << "--- Example: Solving differential equations (solve_diff_eq) ---" << std::endl;
     std::cout << "Modeling the decay of a substance, where the decay rate is proportional to the amount of substance (y' = -0.5*y)." << std::endl;
     double initial_amount = 100.0;

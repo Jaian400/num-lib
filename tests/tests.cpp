@@ -59,7 +59,7 @@ int main(int argc, char* argv[]) {
     };
     tests["all"] = [](){
         std::cout << "--------------------- RUNNING ALL TESTS --------------------------------------" << std::endl;
-        test_diff_eq();
+        test_diff_eq();        
         test_interpolate();
         test_approx();
         test_nonlin_eq();

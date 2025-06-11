@@ -77,6 +77,7 @@ void test_4x4() {
 }
 
 void test_lin_eq(){
+    std::cout << "--------------------- RUNNING LINEAR EQUATION SYSTEM TEST --------------------" << std::endl;
     test_3x3();
     test_4x4();
 }

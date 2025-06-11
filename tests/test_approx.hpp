@@ -56,6 +56,7 @@ double f1 (double x){
 }
 
 void test_approx(){
+    std::cout << "--------------------- RUNNING APPROXIMATION TEST -----------------------------" << std::endl;
     std::vector<double> base;
     std::pair<double, double> ab = {-1, 2};
     // std::pair<double, double> ab = {0, M_PI/2};
