@@ -195,10 +195,6 @@ double solve_nonlinear_regula_falsi(double (*f)(double), double a, double b){
     return x1;
 }
 
-std::vector<double> solve_nonlin_eq(double (*f)(double), std::pair<double, double> ab){
-    return solve_nonlin_eq(f, ab, 0.01);
-}
-
 std::vector<double> solve_nonlin_eq(double (*f)(double), std::pair<double, double> ab, double step){
     std::vector<double> x0;
     std::vector<double> x_p;

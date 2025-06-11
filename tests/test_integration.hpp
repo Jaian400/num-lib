@@ -1,7 +1,7 @@
 #include "../include/integration.hpp"
 
 void test_integration(){
-    double tolerance = 0.01;
+    double tolerance = 0.0001;
 
     std::cout << "RUNNING INTEGRATION TEST\n\n";
 
