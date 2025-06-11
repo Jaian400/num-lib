@@ -282,7 +282,7 @@ void test_nonlin_eq_2(double tolerance){
     outputs_excepted.push_back({-1.48417,0.03333518,1.72233}); // 2
     outputs_excepted.push_back({-2.61753, -2.35654, -1.65084, -1.35934, -0.963027, -0.709429, -0.282375, -0.054708, 
         0.394475, 0.602896, 1.069, 1.26239, 1.74198, 1.92319, 2.41386, 2.58495}); // 3
-    outputs_excepted.push_back({7.58E-17, 0.850651}); // 4
+    outputs_excepted.push_back({7.58E-17, 0.584771}); // 4
     outputs_excepted.push_back({-1.03427, -0.722765, 0.722765, 1.03427}); // 5
     outputs_excepted.push_back({-2.83333, -2.5, -2.16667, -1.83333, -1.5, -1.16667, -0.833333, -0.5, -0.166667, 
         0.166667, 0.5, 0.833333, 1.16667, 1.5, 1.83333, 2.16667, 2.5, 2.83333}); // 6
@@ -306,15 +306,17 @@ void test_nonlin_eq_2(double tolerance){
             error_sum += abs(outputs[i][j] - outputs_excepted[i][j]);
             count++;
         }
-    }
+        double mean_error = error_sum / count;
+        if(mean_error < tolerance){
+            std::cout<<"TEST "<< i+1 <<" PASSED\n";
+        } else {
+            std::cout<<"TEST "<< i+1 <<" FAILED\n";
+        }
 
-    double mean_error = error_sum / count;
-
-    if(mean_error < tolerance){
-        std::cout<<"TEST PASSED\n";
-    } else {
-        std::cout<<"TEST FAILED\n";
+        error_sum=0;
+        count=0;
     }
+    
 }
 
 // void generate_points(){

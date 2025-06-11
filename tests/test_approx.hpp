@@ -3,11 +3,11 @@
 #include <iomanip>
 #include <fstream>
 
-void verify_approximation(const std::vector<double>& coeffs, double (*f)(double), std::pair<double, double> ab, double tolerance) {
+bool verify_approximation(const std::vector<double>& coeffs, double (*f)(double), std::pair<double, double> ab, double tolerance) {
     std::ofstream output_csv("output_test_aprox.csv");
     if (!output_csv.is_open()) {
         std::cerr << "Error, cannot open file\n"; 
-        return;
+        return false;
     }
 
     int N = 20;
@@ -37,40 +37,43 @@ void verify_approximation(const std::vector<double>& coeffs, double (*f)(double)
                     "," << error << "\n";
     }
 
+    output_csv.close();
+
     double mean_error = error_sum / (N+1);
     if(mean_error < tolerance){
-        std::cout << "TEST PASSED\n";
-    } else {
-        std::cout << "TEST FAILED\n";
-    }
-
-    output_csv.close();
+        return true;
+    } 
+    return false;
 }
 
-double f0 (double x){
-    return sin(x);
+bool test_approx_case1(){
+    auto f = [](double x){
+        return std::exp(x) * std::cos(5 * x) - std::pow(x, 3);
+    };
+    std::pair<double, double> ab = {-1, 2};
+    std::vector<double> output = approximate(ab, f);
+
+    return verify_approximation(output, f, ab, 0.001);
 }
 
-double f1 (double x){
-    return std::exp(x) * std::cos(5 * x) - std::pow(x, 3);
+bool test_approx_case2(){
+    auto f = [](double x){
+        return std::sin(x) - 2*x;
+    };
+    std::pair<double, double> ab = {-3, 0};
+    std::vector<double> output = approximate(ab, f);
+
+    return verify_approximation(output, f, ab, 0.001);
 }
 
 void test_approx(){
     std::cout << "--------------------- RUNNING APPROXIMATION TEST -----------------------------" << std::endl;
-    std::vector<double> base;
-    std::pair<double, double> ab = {-1, 2};
-    // std::pair<double, double> ab = {0, M_PI/2};
-    for (size_t i = 0; i < 10; i++)
-    {
-        base.push_back(1);
+    std::vector<bool(*)()>cases = {test_approx_case1, test_approx_case2};
+    for(int i=0; i<cases.size(); i++){
+        if(cases[i]){
+            std::cout << "TEST NR " << i+1 << " PASSED\n";
+            continue;
+        }
+        std::cout << "TEST NR " << i+1 << " FAILED\n";
     }
-
-    std::vector<double> output = approximate(ab, f1);
-
-    // for (double o : output){
-    //     std::cout << o << "\n";
-    // }
-    
-    // std::cout << "\nAPPROXIMATION TEST \n";
-    verify_approximation(output, f1, ab, 0.001);
 }

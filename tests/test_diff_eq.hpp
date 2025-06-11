@@ -83,13 +83,16 @@ double T0 = 0;
 
 double T_s(double t){
     return 1 / std::pow(3* alfa * t + T0,1.0/3.0);
+}
 
-    // return 1 / (std::pow(3, 1.0/3.0) * std::pow(alfa * t, 1.0/3.0));
+double beta = 0.5;
 
-    // const double numerator = 446000 * std::pow(5, 2.0/3.0);
-    // const double denominator = std::pow(1600000000 - 99806103 * t, 1.0/3.0);
-    
-    // return numerator / denominator;
+double F(double y, double t){
+    return - beta * y;
+}
+
+double F_s(double t){
+    return 1115 * std::exp(-beta * t);
 }
 
 void test_euler(){
@@ -122,18 +125,39 @@ void test_euler(){
 // int n = 10;
 
 void test_method(std::vector<double> (*method)(int, std::pair<double, double>, double, double (*)(double, double)), std::string filename){
+    double tolerance = 0.01;
+    
     std::pair <double, double> ab = {0, 1115};
     double y0 = 1115;
     T0 = 1 / std::pow(y0, 3);
-    int N = 50;
+    int N = 100;
 
     std::vector <double> result = method(N, ab, y0, T);
     
-    double tolerance = 0.01;
     if(test_passed(N, result, ab, T_s, filename, tolerance)){
-        std::cout << "TEST PASSED\n";
+        std::cout << "TEST 1 PASSED\n";
     } else {
-        std::cout << "TEST FAILED\n";
+        std::cout << "TEST 1 FAILED\n";
+    }
+
+    ab = {0, 2000}; 
+
+    result = method(N, ab, y0, T);
+
+    if(test_passed(N, result, ab, T_s, filename, tolerance)){
+        std::cout << "TEST 2 PASSED\n";
+    } else {
+        std::cout << "TEST 2 FAILED\n";
+    }
+
+    ab = {0, 10}; 
+
+    result = method(N, ab, y0, F);
+
+    if(test_passed(N, result, ab, F_s, filename, tolerance)){
+        std::cout << "TEST WITH WRONG PARAMETERES PASSED\n";
+    } else {
+        std::cout << "TEST WITH WRONG PARAMETERES FAILED\n";
     }
 }
 

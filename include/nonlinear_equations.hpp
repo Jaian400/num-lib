@@ -14,8 +14,8 @@
 /*
 Założenia:
 
-    1. W przedziale [ a , b ] {\displaystyle [a,b]} znajduje się dokładnie jeden pierwiastek funkcji f . {\displaystyle f.}
-    2. Funkcja ma różne znaki na krańcach przedziału, tj. f ( a ) ⋅ f ( b ) < 0. {\displaystyle f(a)\cdot f(b)<0.}
+    1. W przedziale [ a , b ] znajduje się dokładnie jeden pierwiastek funkcji f.
+    2. Funkcja ma różne znaki na krańcach przedziału, tj. f ( a ) ⋅ f ( b ) < 0. 
     3. Pierwsza i druga pochodna funkcji mają stały znak w tym przedziale.
 */
 
