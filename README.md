@@ -14,7 +14,7 @@ Jest to zbiór funkcji w języku C++, implementujących popularne metody numeryc
 ---
 
 ## Instalacja
-Pobierz pełny folder num-lib i umieść w swoim folderze bibliotek. Następnie w swoim kodzie zaimportuj "num-lib/num-lib.hpp".
+Pobrać pełny folder num-lib i umieścić w swoim folderze bibliotek. Następnie w kodzie zaimportować "num-lib/num-lib.hpp".
 
 ```cpp
 #include "num-lib/num-lib.hpp"
@@ -32,7 +32,7 @@ W celu rekompilacji wywołać polecenie:
 ```
 
 ## Przykład_użycia
-Przykład ten oraz dodatkowy znajdziesz w folderze examples/.
+Przykład ten oraz dodatkowy można znaleźć w folderze examples/.
 
 ```cpp
 void example_interpolate(){
