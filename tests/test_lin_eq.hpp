@@ -22,8 +22,7 @@ void run_test(const std::string& test_name,
                   
     std::cout << "Running test: " << test_name << "..." << std::endl;
     
-    int N = A.size();
-    std::vector<double> actual_x = solve_lin_eq(A, b, N);
+    std::vector<double> actual_x = solve_lin_eq(A, b);
 
     if (compare_vectors(actual_x, expected_x)) {
         std::cout << "[ PASS ]" << std::endl;

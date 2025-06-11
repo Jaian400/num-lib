@@ -1,4 +1,4 @@
-double func_decay(double x, double y) {
+double func_decay(double x ,double y) {
     // y' = -0.5 * y (radioactive decay model)
     return -0.5 * y;
 }

@@ -67,9 +67,8 @@ Rozwiązuje układ `N` równań liniowych z `N` niewiadomymi, zapisany w formie 
 
 ```cpp
 std::vector<double> solve_lin_eq(
-    std::vector<std::vector<double>> matrix,
-    std::vector<double> b,
-    int N
+    const std::vector<std::vector<double>>& matrix,
+    const std::vector<double>& b
 );
 ```
 
@@ -79,7 +78,6 @@ Funkcja używa metody eliminacji Gaussa. Przekształca ona układ równań do pr
 ### Parametry
 *   `matrix`: Macierz `A` współczynników przy niewiadomych.
 *   `b`: Wektor `b` wyrazów wolnych.
-*   `N`: Liczba równań (i niewiadomych).
 
 ### Zwracana wartość
 *   `std::vector<double>`: Wektor `x`, czyli rozwiązanie układu równań.

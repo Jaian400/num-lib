@@ -100,36 +100,36 @@ void solve_lin_eq(FunctionData data){
     check_precision_gauss(A_prim, N, x);
 }
 
-std::vector<double> solve_lin_eq(std::vector<std::vector<double>> matrix, std::vector<double> b, int N){
-    double A[MAXN][MAXN+1];
-    double A_prim[MAXN][MAXN+1];
-    double x[MAXN];
-    std::vector<double> output;
-    
-    for(int i = 0; i < N;i++){
-        for (int j = 0; j < N; j++)
-        {
-            A[i][j] = matrix[i][j];
-            A_prim[i][j] =  matrix[i][j];
+std::vector<double> solve_lin_eq(const std::vector<std::vector<double>>& matrix, const std::vector<double>& b){
+    const size_t n = matrix.size();
+
+    //walidacja macierzy
+    if (n == 0 || n > MAXN) {
+        throw std::runtime_error("Nieprawidłowy lub zbyt duży rozmiar macierzy.");
+    }
+    if (b.size() != n) {
+        throw std::runtime_error("Rozmiar wektora 'b' nie pasuje do rozmiaru macierzy.");
+    }
+    for (size_t i = 0; i < n; ++i) {
+        if (matrix[i].size() != n) {
+            throw std::runtime_error("Macierz nie jest kwadratowa.");
         }
-        A[i][N] = b[i];
-        A_prim[i][N] = b[i];
     }
 
-    // print_matrix(N, A);
-    // std::cout<<"\n\n\n";
-
-    partial_pivot(A, N);
-    back_substitute(A, N, x);
+    double A[MAXN][MAXN+1];
+    double x[MAXN];
     
-    // std::cout << "Rozwiazania: \n";
-    for (int i = 0; i < N; i++) {
-      
-        // std::cout << x[i] << "\n";
-        output.push_back(x[i]);
+    for(size_t i = 0; i < n; i++){
+        for (size_t j = 0; j < n; j++) {
+            A[i][j] = matrix[i][j];
+        }
+        A[i][n] = b[i];
     }
 
-    return output;
+    partial_pivot(A, n);
+    back_substitute(A, n, x);
+    
+    return std::vector<double>(x, x + n);
 }
 
 // int main(){

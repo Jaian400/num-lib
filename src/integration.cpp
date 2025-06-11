@@ -9,7 +9,7 @@ double integrate(int n, std::vector <double> ai, std::pair <double, double> ab){
     h = (ab.second - ab.first)/(2*n);
     // std::cout<<"h -> " << h<<"\n";
     // std::cout<<"x -> ";
-    for (size_t i = 0; i <= 2*n; i++)
+    for (int i = 0; i <= 2*n; i++)
     {
         x.push_back(ab.first + i*h);
         // std::cout<<x[i]<<" ";
@@ -117,7 +117,7 @@ double subdivided_quadrature(int parts, int n, std::vector<double> wi, std::vect
 
 double quadrature(int n, std::vector <double> x, std::vector <double> wi, std::pair <double, double> ab, double (*f)(double)){
     double sum = 0.f;
-    for (size_t i=0; i<n; i++){
+    for (int i=0; i<n; i++){
         sum += wi[i] * f(((ab.second - ab.first) * x[i] + (ab.second + ab.first)) * 0.5f);
     }
 
@@ -126,7 +126,7 @@ double quadrature(int n, std::vector <double> x, std::vector <double> wi, std::p
 
 double quadrature(int n, std::vector <double> x, std::vector <double> wi, std::pair <double, double> ab, std::vector <double> ai){
     double sum = 0.f;
-    for (size_t i=0; i<n; i++){
+    for (int i=0; i<n; i++){
         sum += wi[i] * calculate_f(ai, ((ab.second - ab.first) * x[i] + (ab.second + ab.first)) * 0.5f);
     }
 
@@ -135,7 +135,7 @@ double quadrature(int n, std::vector <double> x, std::vector <double> wi, std::p
 
 double trapezoid(int n, std::vector <double> x, std::vector <double> ai){
     double sum = 0.f;
-    for (size_t i = 1; i < n; i++){
+    for (int i = 1; i < n; i++){
         sum += (x[i] - x[i-1]) * (calculate_f(ai, x[i]) + calculate_f(ai, x[i-1]));
     }
 
@@ -144,7 +144,7 @@ double trapezoid(int n, std::vector <double> x, std::vector <double> ai){
 
 double rectangual(int n, std::vector <double> x, std::vector <double> ai){
     double sum = 0.f;
-    for (size_t i = 1; i < n; i++){
+    for (int i = 1; i < n; i++){
         sum += (x[i] - x[i-1]) * calculate_f(ai, x[i]);
     }
 

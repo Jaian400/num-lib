@@ -41,7 +41,6 @@ std::vector<std::pair<double, double>> solve_differential_equation_with_x(int N,
 }
 
 std::vector<double> solve_diff_eq_heuna(int N, std::pair<double, double> ab, double y0, double (*f)(double, double)){
-    double x0 = ab.first;
     double h = (ab.second - ab.first) / N;
 
     std::vector <double> out (N + 1);
