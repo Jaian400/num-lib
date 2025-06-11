@@ -191,7 +191,7 @@ double solve_nonlinear_regula_falsi(double (*f)(double), double a, double b){
         }
     }
     
-    std::cerr << "WARNING: Out of iteration limit\n";
+    // std::cerr << "WARNING: Out of iteration limit\n";
     return x1;
 }
 

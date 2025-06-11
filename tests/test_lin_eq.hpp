@@ -1,4 +1,4 @@
-#include "../include/gauss.hpp"
+#include "../include/linear_equations.hpp"
 #include <iostream>
 #include <math.h>
 

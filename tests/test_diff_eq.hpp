@@ -13,19 +13,19 @@ bool test_passed(int N, std::vector<double> result, std::pair<double,double> ab,
     double h = (ab.second - ab.first) / N;
 
     // std::cout << std::fixed << std::setprecision(5);
-    std::cout << std::setw(15) << "x  |"
-                    << std::setw(15) << "numerical  |" 
-                    << std::setw(15) << "precisied  |" 
-                    << std::setw(15) << "error  \n";
+    // std::cout << std::setw(15) << "x  |"
+    //                 << std::setw(15) << "numerical  |" 
+    //                 << std::setw(15) << "precisied  |" 
+    //                 << std::setw(15) << "error  \n";
     // output_csv << "x" << ","
     //                 << "numerical" << "," 
     //                 <<"precisied" << ","
     //                 << "error" << "\n";
     
-    for (size_t i = 0; i < 60; i++){
-        std::cout<<"-";
-    }
-    std::cout<<"\n";
+    // for (size_t i = 0; i < 60; i++){
+    //     std::cout<<"-";
+    // }
+    // std::cout<<"\n";
 
     double sum_error_sqr = 0;
     double error_sqr;
@@ -41,10 +41,10 @@ bool test_passed(int N, std::vector<double> result, std::pair<double,double> ab,
         // if(i != N){
         //    continue; 
         // }
-        std::cout << std::setw(14) << x << "|"
-                    << std::setw(14) << result[i] << "|" 
-                    << std::setw(14) <<expected << "|"
-                    << std::setw(14) << error << "\n";
+        // std::cout << std::setw(14) << x << "|"
+        //             << std::setw(14) << result[i] << "|" 
+        //             << std::setw(14) <<expected << "|"
+        //             << std::setw(14) << error << "\n";
         
                     output_csv << x << ","
                     << result[i] << "," 
@@ -131,9 +131,9 @@ void test_method(std::vector<double> (*method)(int, std::pair<double, double>, d
     
     double tolerance = 0.01;
     if(test_passed(N, result, ab, T_s, filename, tolerance)){
-        std::cout << "TEST PASSED; Error smaller than " << tolerance << "\n";
+        std::cout << "TEST PASSED\n";
     } else {
-        std::cout << "TEST FAILED; Error greater than " << tolerance << "\n";
+        std::cout << "TEST FAILED\n";
     }
 }
 
@@ -141,19 +141,19 @@ void test_diff_eq(){
     std::cout << "--------------------- RUNNING DIFFERENTIAL EQUATION TEST ---------------------" << std::endl;
     std::cout<<"\n";
 
-    std::cout<<"TEST EULER-----------------\n\n";
-    test_method(solve_diff_eq_euler, "output_test_euler.csv");
-    std::cout<<"\n\n";
+    // std::cout<<"TEST EULER-----------------\n\n";
+    // test_method(solve_diff_eq_euler, "output_test_euler.csv");
+    // std::cout<<"\n\n";
 
-    std::cout<<"TEST HEUNA-----------------\n\n";
-    test_method(solve_diff_eq_heuna, "output_test_heuna.csv");
-    std::cout<<"\n\n";
+    // std::cout<<"TEST HEUNA-----------------\n\n";
+    // test_method(solve_diff_eq_heuna, "output_test_heuna.csv");
+    // std::cout<<"\n\n";
     
-    std::cout<<"TEST MIDPOINT-------------------\n\n";
-    test_method(solve_diff_eq_midpoint, "output_test_midpoint.csv");
-    std::cout<<"\n\n";
+    // std::cout<<"TEST MIDPOINT-------------------\n\n";
+    // test_method(solve_diff_eq_midpoint, "output_test_midpoint.csv");
+    // std::cout<<"\n\n";
     
-    std::cout<<"TEST RUNGE KUTTY-------------------\n\n";
-    test_method(solve_diff_eq_runge_kutty, "output_test_runge_kutty.csv");
-    std::cout<<"\n\n";
+    // std::cout<<"TEST DIFF EQUTAIONS-------------------\n\n";
+    test_method(solve_diff_eq_runge_kutty, "output_test_diff_eq.csv");
+    // std::cout<<"\n";
 }

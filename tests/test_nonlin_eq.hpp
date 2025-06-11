@@ -291,7 +291,7 @@ void test_nonlin_eq_2(double tolerance){
     std::vector<std::vector<double>> outputs;
 
     for (size_t i=0;i<funcs.size();i++){
-        std::cout<<"\nTESTY DLA FUNKCJI NUMER "<< i+1 << "\n\n";
+        // std::cout<<"\nTESTY DLA FUNKCJI NUMER "<< i+1 << "\n\n";
         outputs.push_back(solve_nonlin_eq(funcs[i],ab));
 
         if(outputs[i].size() != outputs_excepted[i].size()){
@@ -300,9 +300,9 @@ void test_nonlin_eq_2(double tolerance){
             return;
         }
 
-        std::cout<<"Uzyskane wyniki:\n";
+        // std::cout<<"Uzyskane wyniki:\n";
         for (size_t j= 0; j < outputs[i].size(); j++){
-            std::cout<<outputs[i][j]<<"\n";
+            // std::cout<<outputs[i][j]<<"\n";
             error_sum += abs(outputs[i][j] - outputs_excepted[i][j]);
             count++;
         }
