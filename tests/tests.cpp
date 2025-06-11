@@ -26,35 +26,27 @@ int main(int argc, char* argv[]) {
     std::map<std::string, std::function<void()>> tests;
 
     tests["diff_eq"] = [](){
-        std::cout << "--------------------- RUNNING DIFFERENTIAL EQUATION TEST ---------------------" << std::endl;
         test_diff_eq();
     };
     tests["interpolate"] = [](){
-        std::cout << "--------------------- RUNNING INTERPOLATION TEST -----------------------------" << std::endl;
         test_interpolate();
     };
     tests["approx"] = [](){
-        std::cout << "--------------------- RUNNING APPROXIMATION TEST -----------------------------" << std::endl;
         test_approx();
     };
     tests["nonlin_eq"] = [](){
-        std::cout << "--------------------- RUNNING NONLINEAR EQUATION TEST ------------------------" << std::endl;
         test_nonlin_eq();
     };
     tests["lin_eq"] = [](){
-        std::cout << "--------------------- RUNNING LINEAR EQUATION SYSTEM TEST --------------------" << std::endl;
         test_lin_eq();
     };
     tests["integration"] = [](){
-        std::cout << "--------------------- RUNNING INTERGRATION TEST ------------------------------" << std::endl;
         test_integration();
     };
     tests["ex_interpolate"] = [](){
-        std::cout << "--------------------- RUNNING INTERPOLATION EXAMPLE --------------------------" << std::endl;
         example_interpolate();
     };
     tests["ex_diff_eq"] = [](){
-        std::cout << "--------------------- RUNNING DIFFERENTIAL EQUATION EXAMPLE ------------------" << std::endl;
         example_solve_diff_eq();
     };
     tests["all"] = [](){

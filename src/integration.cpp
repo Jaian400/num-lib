@@ -113,7 +113,7 @@ double rectangual(std::vector <double> ai, std::vector <double> x, int n){
 
 double calculate_f(std::vector<double> ai, double x){
     double result = ai.back();
-    for (int i = ai.size() - 2; i >= 0; --i) {
+    for (int i = int(ai.size()) - 2; i >= 0; --i) {
         result = result * x + ai[i];
     }
     return result;

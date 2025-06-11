@@ -4,6 +4,7 @@
 3.  [`solve_lin_eq`](#solve_lin_eq)
 4.  [`interpolate`](#interpolate)
 5.  [`solve_nonlin_eq`](#solve_nonlin_eq)
+6.  [`integrate`](#integrate)
 
 ---
 
@@ -134,3 +135,34 @@ Najpierw funkcja "skanuje" duży przedział `[a, b]`, dzieląc go na wiele mały
 
 ### Zwracana wartość
 *   `std::vector<double>`: Wektor zawierający znalezione miejsca zerowe funkcji.
+
+Oczywiście, oto dokumentacja dla nowej funkcji `integrate`, napisana w tym samym stylu co poprzednie.
+
+---
+
+## `integrate`
+
+Funkcja ta oblicza całkę oznaczoną (czyli pole pod wykresem) z wielomianu na zadanym przedziale `[a, b]`, wykorzystując **metodę Simpsona**.
+
+```cpp
+double integrate(
+    std::vector <double> ai,
+    std::pair <double, double> ab,
+    int n=100
+);
+```
+
+### Jak działa?
+Funkcja przyjmuje wielomian zdefiniowany przez jego współczynniki. Aby obliczyć pole pod jego wykresem, stosuje numeryczną metodę Simpsona. Działa to w następujący sposób:
+
+1.  Przedział całkowania `[a, b]` jest dzielony na bardzo dużą liczbę (`2*n`) małych, równych sobie podprzedziałów.
+2.  Zamiast traktować krzywą na tych małych odcinkach jako linię prostą, metoda Simpsona przybliża ją za pomocą fragmentów parabol. Jest to znacznie dokładniejsze niż prostsze metody.
+3.  Funkcja sumuje pola powierzchni pod tymi wszystkimi małymi parabolami, co w efekcie daje bardzo dobre przybliżenie całkowitego pola pod wykresem wielomianu.
+
+### Parametry
+*   `std::vector<double> ai`: Wektor współczynników wielomianu, który ma być scałkowany. Kolejność jest kluczowa, np. wektor `{a0, a1, a2}` reprezentuje wielomian `W(x) = a0 + a1*x + a2*x^2`.
+*   `std::pair<double, double> ab`: Para liczb `(a, b)` określająca przedział całkowania.
+*   `int n` (opcjonalny): Liczba podziałów użytych w metodzie Simpsona. Im większa wartość `n`, tym dokładniejszy wynik. Domyślnie wynosi `100`.
+
+### Zwracana wartość
+*   `double`: Obliczona, przybliżona wartość całki z wielomianu na przedziale `[a, b]`.
