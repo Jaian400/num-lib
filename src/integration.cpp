@@ -2,75 +2,35 @@
 #include "math.h"
 #include <fstream>
 
-double integrate(int n, std::vector <double> ai, std::pair <double, double> ab){
+double integrate(std::vector <double> ai, std::pair <double, double> ab, int n){
     double h;
     std::vector <double> x;
 
     h = (ab.second - ab.first)/(2*n);
     // std::cout<<"h -> " << h<<"\n";
     // std::cout<<"x -> ";
-    for (int i = 0; i <= 2*n; i++)
+    for (int i = 0; i <= 2*n; ++i)
     {
         x.push_back(ab.first + i*h);
         // std::cout<<x[i]<<" ";
     }
     // std::cout<<"\n";
 
-    double output_simpson = h * simpson(n, x, ai) / 3;
+    double output_simpson = h * simpson(ai, x, n) / 3;
     // std::cout<<"Wynik z simpsona -> " << output_simpson << "|";
 
     return output_simpson;
 }
 
-double integrate(int n, double (*f)(double), std::pair <double, double> ab){
+double integrate(double (*f)(double), std::pair <double, double> ab, int n){
     std::vector<double> x = {0.0, 0.5384693, -0.5384693, 0.9061798, -0.9061798};
     std::vector<double> wi = {0.5688889, 0.4786287, 0.4786287, 0.2369269, 0.2369269};
     
-    double output_quad = subdivided_quadrature(n, x.size(), wi, x, ab, f);
+    double output_quad = subdivided_quadrature(n, wi, x, ab, f);
     return output_quad;
-
-    // double h;
-    // std::vector <double> x;
-
-    // h = (ab.second - ab.first)/(2*n);
-    // // std::cout<<"h -> " << h<<"\n";
-    // // std::cout<<"x -> ";
-    // for (size_t i = 0; i <= 2*n; i++)
-    // {
-    //     x.push_back(ab.first + i*h);
-    //     // std::cout<<x[i]<<" ";
-    // }
-    // // std::cout<<"\n";
-
-    // double output_simpson = h * simpson(n, x, f) / 3;
-    // // std::cout<<"Wynik z simpsona -> " << output_simpson << "|";
-
-    // return output_simpson;
 }
 
-
-// int main(){
-//     // function data = load_data("d.txt");
-//     FunctionData data = load_data("kwadratury_gr_4.txt");
-//     print_input(data);
-
-//     int degree = data.N; 
-//     std::vector<double> ai = data.x;
-//     std::pair<double, double> ab = {data.fx[0], data.fx[1]};
-//     // std::pair<double, double> ab = {3.5, 6.5296812439344};
-
-//     std::ofstream outputFile("output.csv");
-
-//     for (size_t i = 10; i < 100; i++)
-//     {
-//         integrate(i, ai, ab);
-//     }
-//     outputFile.close();
-
-//     return 0;
-// }
-
-double simpson(int n, std::vector <double> x, double (*f)(double)){
+double simpson(double(*f)(double), std::vector <double> x, int n){
     double sum1 = 0.f;
     double sum2 = 0.f;
 
@@ -85,7 +45,7 @@ double simpson(int n, std::vector <double> x, double (*f)(double)){
     return f(x[0]) + 4 * sum1 + 2 * sum2 + f(x[2*n]);
 }
 
-double simpson(int n, std::vector <double> x, std::vector <double> ai){
+double simpson(std::vector <double> ai, std::vector <double> x, int n){
     double sum1 = 0.f;
     double sum2 = 0.f;
 
@@ -100,25 +60,25 @@ double simpson(int n, std::vector <double> x, std::vector <double> ai){
     return calculate_f(ai, x[0]) + 4 * sum1 + 2 * sum2 + calculate_f(ai, x[2*n]);
 }
 
-double subdivided_quadrature(int parts, int n, std::vector<double> wi, std::vector<double> xi, std::pair<double, double> ab, double (*f)(double)) {
+double subdivided_quadrature(int n, std::vector<double> wi, std::vector<double> xi, std::pair<double, double> ab, double (*f)(double)) {
     double total = 0.f;
     double a = ab.first;
     double b = ab.second;
-    double h = (b - a) / parts;
+    double h = (b - a) / n;
 
-    for (int i = 0; i < parts; ++i) {
+    for (int i = 0; i < n; ++i) {
         double sub_a = a + i * h;
         double sub_b = sub_a + h;
-        total += quadrature(n, xi, wi, {sub_a, sub_b}, f);
+        total += quadrature(f, xi, wi, {sub_a, sub_b});
     }
 
     return total;
 }
 
-double quadrature(int n, std::vector <double> x, std::vector <double> wi, std::pair <double, double> ab, double (*f)(double)){
+double quadrature(double (*f)(double), std::vector <double> xi, std::vector <double> wi, std::pair <double, double> ab){
     double sum = 0.f;
-    for (int i=0; i<n; i++){
-        sum += wi[i] * f(((ab.second - ab.first) * x[i] + (ab.second + ab.first)) * 0.5f);
+    for (int i=0; i<xi.size(); i++){
+        sum += wi[i] * f(((ab.second - ab.first) * xi[i] + (ab.second + ab.first)) * 0.5f);
     }
 
     return (ab.second-ab.first) * sum / 2;
@@ -133,7 +93,7 @@ double quadrature(int n, std::vector <double> x, std::vector <double> wi, std::p
     return (ab.second-ab.first) * sum / 2;
 }
 
-double trapezoid(int n, std::vector <double> x, std::vector <double> ai){
+double trapezoid(std::vector <double> ai, std::vector <double> x, int n){
     double sum = 0.f;
     for (int i = 1; i < n; i++){
         sum += (x[i] - x[i-1]) * (calculate_f(ai, x[i]) + calculate_f(ai, x[i-1]));
@@ -142,7 +102,7 @@ double trapezoid(int n, std::vector <double> x, std::vector <double> ai){
     return 0.5 * sum; 
 }
 
-double rectangual(int n, std::vector <double> x, std::vector <double> ai){
+double rectangual(std::vector <double> ai, std::vector <double> x, int n){
     double sum = 0.f;
     for (int i = 1; i < n; i++){
         sum += (x[i] - x[i-1]) * calculate_f(ai, x[i]);
@@ -162,13 +122,13 @@ double calculate_f(std::vector<double> ai, double x){
 void print_input(FunctionData data){
     std::cout<<"n -> "<<data.N<<"\n";
     std::cout<<"ai -> ";
-    for (size_t i = 0; i < data.x.size(); i++)
+    for (int i = 0; i < data.x.size(); i++)
     {
         std::cout<<data.x[i]<<" ";
     }
     std::cout<<"\n";
     std::cout<<"a, b -> ";
-    for (size_t i = 0; i < data.fx.size(); i++)
+    for (int i = 0; i < data.fx.size(); i++)
     {
         std::cout<<data.fx[i]<<" ";
     }
