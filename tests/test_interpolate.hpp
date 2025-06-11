@@ -15,7 +15,7 @@ void test_interpolation_at_known_point() {
     double actual_result = interpolate(x, f, xp);
 
     if (std::fabs(actual_result - expected_result) < 1e-9) {
-        std::cout << "PASSED Test 1: Interpolation at a known point" << std::endl;
+        std::cout << "TEST NR 1 PASSED" << std::endl;
     } else {
         std::cout << "FAILED Test 1: Interpolation at a known point" 
                   << ". Expected: " << expected_result 
@@ -32,7 +32,7 @@ void test_interpolation_between_points() {
     double actual_result = interpolate(x, f, xp);
 
     if (std::fabs(actual_result - expected_result) < 1e-9) {
-        std::cout << "PASSED Test 2: Interpolation between points" << std::endl;
+        std::cout << "TEST NR 2 PASSED" << std::endl;
     } else {
         std::cout << "FAILED Test 2: Interpolation between points" 
                   << ". Expected: " << expected_result 
