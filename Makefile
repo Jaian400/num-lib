@@ -16,8 +16,16 @@ INCLUDES   := -I$(IDIR)
 
 VPATH := $(SDIR):$(TDIR)
 
-SOURCES := $(wildcard $(SDIR)/*.cpp) $(wildcard $(TDIR)/*.cpp)
+# --- Define Source and Object files ---
+
+# NEW: Sources and Objects for the LIBRARY ONLY
+LIB_SOURCES := $(wildcard $(SDIR)/*.cpp)
+LIB_OBJECTS := $(patsubst %.cpp,$(ODIR)/%.o,$(notdir $(LIB_SOURCES)))
+
+# Sources and Objects for the FULL TEST EXECUTABLE (Library + Tests)
+SOURCES := $(LIB_SOURCES) $(wildcard $(TDIR)/*.cpp)
 OBJECTS := $(patsubst %.cpp,$(ODIR)/%.o,$(notdir $(SOURCES)))
+
 
 # This variable holds the test name passed from the command line.
 # The ?= operator sets it only if it's not already set.
@@ -29,7 +37,10 @@ TEST ?=
 # Default target: build the executable
 all: $(EXECUTABLE)
 
-# Rule to run the executable with a specific test
+# Target to compile only the library object files
+library: $(LIB_OBJECTS)
+	@echo "Library object files are compiled in $(ODIR)/"
+
 # Pass the test name using: make run TEST=<test_name>
 run: all
 	@echo "--- Running test: $(TEST) ---"
@@ -55,4 +66,5 @@ clean:
 	rm -rf $(ODIR) $(BDIR)
 
 # Declare phony targets
-.PHONY: all run clean
+# NEW: Added 'library' to the phony list
+.PHONY: all run clean library
