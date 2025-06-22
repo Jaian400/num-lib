@@ -186,8 +186,6 @@ Najpierw funkcja "skanuje" duży przedział `[a, b]`, dzieląc go na wiele mały
 ### Zwracana wartość
 *   `std::vector<double>`: Wektor zawierający znalezione miejsca zerowe funkcji.
 
-Oczywiście, oto dokumentacja dla nowej funkcji `integrate`, napisana w tym samym stylu co poprzednie.
-
 ---
 
 ## `integrate`
